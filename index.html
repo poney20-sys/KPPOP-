@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FIRE-CORE v12.0 - PRO COMMAND</title>
+    <title>FIRE-CORE v12.1 - PRO COMMAND MOBILE STABLE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap');
         
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         
         body, html { 
             margin: 0; padding: 0; 
@@ -29,7 +29,7 @@
         header {
             flex: 0 0 55px;
             background: #0a0b0e;
-            padding: 0 20px;
+            padding: 0 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -39,15 +39,15 @@
 
         .search-bar {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex: 1;
             max-width: 450px;
-            margin: 0 20px;
+            margin: 0 10px;
         }
 
         input#addr-input {
             flex: 1;
-            padding: 8px 15px;
+            padding: 8px 12px;
             border-radius: 6px;
             border: 1px solid #374151;
             background: #111827;
@@ -60,7 +60,7 @@
         input#addr-input:focus { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2); }
 
         .btn-search {
-            padding: 8px 20px;
+            padding: 8px 15px;
             background: #ef4444;
             color: #fff;
             border: none;
@@ -68,10 +68,7 @@
             font-weight: 600;
             cursor: pointer;
             font-size: 13px;
-            transition: background 0.2s;
         }
-
-        .btn-search:hover { background: #dc2626; }
 
         /* Main Workspace */
         main {
@@ -81,7 +78,7 @@
             position: relative;
         }
 
-        /* Information Sidebar - Sleek Card System */
+        /* Information Sidebar */
         #info-sidebar {
             flex: 0 0 280px;
             background: #0a0b0e;
@@ -97,8 +94,8 @@
             background: #111827;
             border: 1px solid #1f2937;
             border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 12px;
+            padding: 10px;
+            margin-bottom: 10px;
         }
 
         .section-title { 
@@ -107,20 +104,20 @@
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 0.05em;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .data-row { font-size: 13px; line-height: 1.5; color: #d1d5db; margin-bottom: 4px; }
+        .data-row { font-size: 13px; line-height: 1.4; color: #d1d5db; margin-bottom: 3px; }
         .data-row b { color: #fff; }
 
         .alert-panel {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid #f59e0b;
             color: #f59e0b;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
@@ -131,6 +128,7 @@
             flex: 1;
             background: radial-gradient(circle at 50% 50%, #111827 0%, #020203 100%);
             position: relative;
+            z-index: 5;
         }
 
         /* Floating Street View Window */
@@ -138,8 +136,8 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            width: 320px;
-            height: 180px;
+            width: 300px;
+            height: 170px;
             background: #000;
             border: 2px solid #374151;
             border-radius: 12px;
@@ -147,41 +145,55 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             display: none;
             z-index: 100;
-            transition: all 0.3s;
         }
-
-        #floating-sv:hover { width: 450px; height: 250px; border-color: #ef4444; }
 
         #floating-sv iframe { width: 100%; height: 100%; border: none; }
 
         /* Mini-Map Overlay */
         #mini-map {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 110px;
-            height: 110px;
+            top: 15px;
+            right: 15px;
+            width: 100px;
+            height: 100px;
             background: #000;
             border: 1px solid #ef4444;
             border-radius: 8px;
             z-index: 50;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
             overflow: hidden;
             display: none;
+            pointer-events: none; /* Don't block canvas rotation */
         }
 
         #mini-map iframe { width: 100%; height: 100%; border: none; }
 
-        /* Responsive Mobile */
+        /* Responsive Mobile UI */
         @media (max-width: 768px) {
             main { flex-direction: column-reverse; }
-            #info-sidebar { flex: 0 0 35%; width: 100%; border-left: none; }
-            #floating-sv { width: 140px; height: 80px; bottom: 37%; right: 10px; }
-            #floating-sv:hover { width: 200px; height: 120px; }
-            #ori-container { transform: scale(0.75); left: 10px; bottom: 36%; }
+            #info-sidebar { 
+                flex: 0 0 40%; 
+                width: 100%; 
+                border-left: none; 
+                border-top: 1px solid #1f2937;
+                display: none;
+            }
+            #floating-sv { 
+                width: 120px; 
+                height: 75px; 
+                bottom: calc(40% + 15px); 
+                right: 10px; 
+            }
+            #ori-container { 
+                left: 10px; 
+                bottom: calc(40% + 15px); 
+                transform: scale(0.7); 
+                transform-origin: bottom left;
+            }
+            #canvas-wrap { flex: 1; }
+            .logo-text { display: none; }
         }
 
-        /* ORI AI ASSISTANT - CLEAN ROBOT */
+        /* ORI AI ASSISTANT */
         #ori-container {
             position: fixed;
             bottom: 25px;
@@ -196,20 +208,17 @@
         #ori-bubble {
             background: #fff;
             color: #111;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             position: relative;
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
             border: 2px solid #ef4444;
             pointer-events: auto;
-            width: 240px;
-            animation: float 3s ease-in-out infinite;
+            width: 220px;
         }
-
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
         #ori-bubble::after {
             content: ''; position: absolute; bottom: -12px; left: 50%;
@@ -218,58 +227,57 @@
         }
 
         #ori-quick-input {
-            width: 100%; margin-top: 8px; padding: 6px 10px;
-            border-radius: 8px; border: 1px solid #d1d5db;
-            font-size: 11px; outline: none; background: #f9fafb;
+            width: 100%; margin-top: 5px; padding: 5px;
+            border-radius: 6px; border: 1px solid #d1d5db;
+            font-size: 10px; outline: none;
         }
 
         #ori-avatar {
-            width: 65px; height: 65px;
+            width: 60px; height: 60px;
             background: #fff;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
             cursor: pointer; border: 3px solid #ef4444;
-            overflow: hidden; pointer-events: auto; transition: 0.3s;
+            overflow: hidden; pointer-events: auto;
         }
 
-        #ori-avatar:hover { transform: scale(1.1) rotate(5deg); }
         #ori-avatar svg { width: 85%; height: 85%; }
 
-        /* Full Chat Window */
         #ori-chat {
-            position: fixed; bottom: 120px; left: 25px;
-            width: 300px; background: #0a0b0e; border: 1px solid #ef4444;
+            position: fixed; bottom: 100px; left: 20px;
+            width: 280px; background: #0a0b0e; border: 1px solid #ef4444;
             border-radius: 15px; display: none; flex-direction: column;
             box-shadow: 0 20px 50px rgba(0,0,0,1); z-index: 10000;
         }
 
-        #ori-header { background: #ef4444; padding: 10px 15px; font-weight: 700; color: #fff; display: flex; justify-content: space-between; font-size: 14px; }
-        #ori-messages { height: 220px; overflow-y: auto; padding: 12px; font-size: 13px; display: flex; flex-direction: column; gap: 8px; }
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; line-height: 1.4; }
+        #ori-header { background: #ef4444; padding: 8px 12px; font-weight: 700; color: #fff; display: flex; justify-content: space-between; font-size: 13px; }
+        #ori-messages { height: 180px; overflow-y: auto; padding: 10px; font-size: 12px; display: flex; flex-direction: column; gap: 6px; }
+        .msg { padding: 6px 10px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
         .msg-ai { background: #1f2937; color: #f3f4f6; align-self: flex-start; border-bottom-left-radius: 0; }
         .msg-user { background: #ef4444; color: #fff; align-self: flex-end; border-bottom-right-radius: 0; }
-        #ori-input-wrap { padding: 10px; border-top: 1px solid #1f2937; display: flex; gap: 8px; }
-        #ori-chat-input { flex: 1; background: #111827; border: 1px solid #374151; color: #fff; padding: 8px; border-radius: 6px; outline: none; }
+        #ori-input-wrap { padding: 8px; border-top: 1px solid #1f2937; display: flex; gap: 5px; }
+        #ori-chat-input { flex: 1; background: #111827; border: 1px solid #374151; color: #fff; padding: 6px; border-radius: 6px; outline: none; font-size: 12px; }
 
         /* Welcome Screen Overlay */
         #welcome-screen {
             position: absolute; inset: 0; background: #020203; z-index: 50;
             display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            padding: 20px;
         }
 
-        .quick-addresses { margin-top: 25px; display: grid; gap: 10px; width: 100%; max-width: 400px; }
+        .quick-addresses { margin-top: 20px; display: grid; gap: 8px; width: 100%; max-width: 380px; }
         .addr-btn { 
             background: #111827; border: 1px solid #1f2937; color: #9ca3af; 
-            padding: 15px; border-radius: 10px; cursor: pointer; font-size: 15px; 
+            padding: 12px; border-radius: 10px; cursor: pointer; font-size: 14px; 
             transition: 0.2s; text-align: center;
         }
-        .addr-btn:hover { border-color: #ef4444; color: #fff; background: #1f2937; }
+        .addr-btn:hover { border-color: #ef4444; color: #fff; }
 
         #loading-screen {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9); padding: 30px; border-radius: 15px;
-            z-index: 200; display: none; color: #ef4444; font-weight: 700; border: 1px solid #ef4444;
+            background: rgba(0,0,0,0.9); padding: 25px; border-radius: 15px;
+            z-index: 200; display: none; color: #ef4444; font-weight: 700; border: 1px solid #ef4444; text-align: center;
         }
 
         .legend-dot { width: 8px; height: 8px; margin-left: 8px; border-radius: 2px; flex-shrink: 0; }
@@ -288,22 +296,20 @@
 
     <div class="app-wrapper">
         <header>
-            <div style="color: #ef4444; font-weight: 700; font-size: 20px; display: flex; align-items: center; gap: 10px;">
-                <span>🚒</span> FIRE-CORE PRO
+            <div class="logo-text" style="color: #ef4444; font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                <span>🚒</span> FIRE-CORE
             </div>
             <div class="search-bar">
-                <input id="addr-input" type="text" placeholder="חיפוש כתובת מבצעית..." autofocus />
-                <button id="search-btn" class="btn-search">אחזר נתונים</button>
+                <input id="addr-input" type="text" placeholder="חיפוש כתובת..." autofocus />
+                <button id="search-btn" class="btn-search">אחזר</button>
             </div>
-            <div style="font-size: 11px; color: #4b5563;">SECURED // OPS-NET</div>
         </header>
 
         <main>
-            <!-- Welcome Overlay -->
             <div id="welcome-screen">
-                <div style="font-size: 60px; margin-bottom: 15px; filter: drop-shadow(0 0 10px #ef4444);">🛡️</div>
-                <h2 style="font-size: 26px; margin: 0; letter-spacing: 1px;">מודיעין מבנים מרחבי</h2>
-                <p style="color: #6b7280; font-size: 15px; margin-top: 5px;">בחר כתובת לאנליזה הנדסית:</p>
+                <div style="font-size: 50px; margin-bottom: 10px; filter: drop-shadow(0 0 10px #ef4444);">🛡️</div>
+                <h2 style="font-size: 22px; margin: 0;">מודיעין מבנים</h2>
+                <p style="color: #6b7280; font-size: 14px; margin-top: 5px;">בחר כתובת לאנליזה הנדסית:</p>
                 <div class="quick-addresses">
                     <div class="addr-btn" onclick="quickSearch('הקשת 3 נס ציונה')">📍 הקשת 3, נס ציונה</div>
                     <div class="addr-btn" onclick="quickSearch('דרך הפרחים 9 גדרה')">📍 דרך הפרחים 9, גדרה</div>
@@ -313,18 +319,17 @@
 
             <div id="loading-screen">מנתח נתוני שטח ודירות...</div>
 
-            <!-- Sidebar -->
             <aside id="info-sidebar">
-                <h3 id="ui-title" style="margin:0 0 15px 0; color: #ef4444; font-size: 18px; border-bottom: 1px solid #1f2937; padding-bottom: 10px;">-</h3>
+                <h3 id="ui-title" style="margin:0 0 10px 0; color: #ef4444; font-size: 16px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">-</h3>
                 
-                <div class="section-title"><span>📍</span> גישה והגעה</div>
+                <div class="section-title"><span>📍</span> גישה</div>
                 <div class="side-card">
                     <div class="data-row" id="ui-main-street">-</div>
                     <div class="data-row" id="ui-access">-</div>
                     <div class="data-row" id="ui-parking">-</div>
                 </div>
 
-                <div class="section-title"><span>🏗️</span> מפרט הנדסי</div>
+                <div class="section-title"><span>🏗️</span> הנדסה</div>
                 <div class="side-card">
                     <div class="data-row" id="ui-floors">-</div>
                     <div class="data-row" id="ui-garden">-</div>
@@ -332,38 +337,25 @@
                     <div class="data-row" id="ui-infra">-</div>
                 </div>
 
-                <div class="section-title"><span>👥</span> דמוגרפיה</div>
-                <div class="side-card">
-                    <div class="data-row" id="ui-pop">-</div>
-                </div>
-
                 <div class="section-title"><span>⚠️</span> התראות</div>
                 <div class="alert-panel" id="ui-alert">-</div>
                 
-                <div style="margin-top: auto; padding-top: 20px; font-size: 10px; color: #4b5563;">
-                    <div style="display:flex; align-items:center; margin-bottom:4px;"><div class="legend-dot" style="background:#ef4444"></div> ליבת בטון (ממ"ד/מעלית)</div>
-                    <div style="display:flex; align-items:center; margin-bottom:4px;"><div class="legend-dot" style="background:#10b981"></div> דירות גן</div>
-                    <div style="display:flex; align-items:center; margin-bottom:4px;"><div class="legend-dot" style="background:#f59e0b"></div> פנטהאוזים</div>
-                    <div style="display:flex; align-items:center; margin-bottom:4px;"><div class="legend-dot" style="background:#6366f1"></div> קווי רדיוס 250 מ'</div>
+                <div style="margin-top: 15px; font-size: 10px; color: #4b5563;">
+                    <div style="display:flex; align-items:center; margin-bottom:3px;"><div class="legend-dot" style="background:#ef4444"></div> ליבת בטון</div>
+                    <div style="display:flex; align-items:center; margin-bottom:3px;"><div class="legend-dot" style="background:#10b981"></div> דירות גן</div>
+                    <div style="display:flex; align-items:center; margin-bottom:3px;"><div class="legend-dot" style="background:#f59e0b"></div> פנטהאוז</div>
                 </div>
             </aside>
 
-            <!-- Workspace -->
             <div id="canvas-wrap">
                 <div id="mini-map"></div>
-                <!-- The 3D view will live here -->
-                
-                <!-- Floating Street View -->
-                <div id="floating-sv">
-                    <div style="color: #4b5563; position: absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size: 11px;">טוען מבט רחוב...</div>
-                </div>
+                <div id="floating-sv"></div>
             </div>
 
-            <!-- ORI ASSISTANT -->
             <div id="ori-container">
                 <div id="ori-bubble">
                     <div class="bubble-text">שלום אני אורי, עוזר וקה"א , לכל שאלה אני לרשותך..</div>
-                    <input type="text" id="ori-quick-input" placeholder="שאל אותי משהו..." />
+                    <input type="text" id="ori-quick-input" placeholder="שאל שאלה..." />
                 </div>
                 <div id="ori-avatar" onclick="toggleOri()">
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -379,18 +371,15 @@
                 </div>
             </div>
 
-            <!-- Full Chat Window -->
             <div id="ori-chat">
                 <div id="ori-header">
-                    <span>ORI AI - OPS SUPPORT</span>
+                    <span>ORI AI - OPS</span>
                     <span style="cursor:pointer" onclick="toggleOri()">✕</span>
                 </div>
-                <div id="ori-messages">
-                    <div class="msg msg-ai">מערכת אורי פעילה. ניתוח מבנה הושלם. איך אוכל לסייע במבצע?</div>
-                </div>
+                <div id="ori-messages"></div>
                 <div id="ori-input-wrap">
-                    <input id="ori-chat-input" type="text" placeholder="הקלד הודעה..." />
-                    <button id="ori-send" style="background:#ef4444; border:none; color:#fff; padding:8px 15px; border-radius:6px; cursor:pointer;">שלח</button>
+                    <input id="ori-chat-input" type="text" placeholder="הקלד..." />
+                    <button id="ori-send" style="background:#ef4444; border:none; color:#fff; padding:5px 10px; border-radius:4px;">שלח</button>
                 </div>
             </div>
         </main>
@@ -406,9 +395,9 @@
         const database = {
             "הקשת 3 נס ציונה": {
                 name: "הקשת 3, נס ציונה",
-                mainStreet: "רחוב השריון (גישה ראשית)",
-                access: "גישת רכב חילוץ מרחוב הקשת בלבד.",
-                parking: "קומת עמודים מפלס 0 + חצרות.",
+                mainStreet: "רחוב השריון",
+                access: "גישה מרחוב הקשת בלבד.",
+                parking: "קומת עמודים + חצרות.",
                 floors: "4 קומות מעל עמודים.",
                 garden: "2 דירות גן (101, 102).",
                 penthouse: "2 פנטהאוזים בקומה 4.",
@@ -428,21 +417,21 @@
             },
             "דרך הפרחים 9 גדרה": {
                 name: "דרך הפרחים 9, גדרה",
-                mainStreet: "ציר הרצל (כביש 40)",
+                mainStreet: "כביש 40",
                 access: "כניסה מדרך הפרחים.",
                 parking: "חניון תת-קרקעי (מינוס 1).",
                 floors: "8 קומות מעל לובי.",
                 garden: "4 דירות גן.",
                 penthouse: "2 פנטהאוזים בקומה 8.",
-                infra: "מים: חזית ימין. חשמל: עורף שמאלי.",
+                infra: "מים: חזית ימין. חשמל: עורף.",
                 pop: "~105 דיירים.",
-                alert: "חניון תת-קרקעי סגור - הצטברות עשן.",
+                alert: "חניון סגור - הצטברות עשן.",
                 lat: 31.8123, lng: 34.7812,
                 sv_embed: "https://www.google.com/maps/embed?pb=!4v1705658000000!6m8!1m7!1s-u_y5f4hO4vH7rG-S4_mOQ!2m2!1d31.8123!2d34.7812!3f180!4f10!5f0.78",
                 cfg: { w: 22, d: 18, floors: 8, h: 3.1, 
                     units: [
-                        {floor: 1, label: "דירת גן 1", type: 'garden', pos: [7, 6]},
-                        {floor: 8, label: "פנטהאוז 801", type: 'penthouse', pos: [6, 0]}
+                        {floor: 1, label: "גן 1", type: 'garden', pos: [7, 6]},
+                        {floor: 8, label: "פנט' 801", type: 'penthouse', pos: [6, 0]}
                     ]
                 }
             }
@@ -455,11 +444,17 @@
             const wrap = document.getElementById('canvas-wrap');
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(35, wrap.clientWidth / wrap.clientHeight, 0.1, 2000);
-            camera.position.set(120, 100, 120);
+            camera.position.set(100, 80, 100);
 
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+            const isMobile = window.innerWidth <= 768;
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: !isMobile, 
+                alpha: true, 
+                powerPreference: isMobile ? 'default' : 'high-performance' 
+            });
+            
             renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
             wrap.appendChild(renderer.domElement);
 
             controls = new OrbitControls(camera, renderer.domElement);
@@ -486,20 +481,20 @@
         function createLabel(text, pos, isUnit = false) {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = 320; canvas.height = 100;
+            canvas.width = 256; canvas.height = 80;
             if(isUnit) {
                 ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-                ctx.beginPath(); ctx.roundRect(10, 10, 300, 80, 15); ctx.fill();
-                ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3; ctx.stroke();
-                ctx.fillStyle = '#fff'; ctx.font = 'Bold 24px Assistant';
+                ctx.beginPath(); ctx.roundRect(5, 5, 240, 70, 12); ctx.fill();
+                ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2; ctx.stroke();
+                ctx.fillStyle = '#fff'; ctx.font = 'Bold 20px Assistant';
             } else {
-                ctx.fillStyle = '#fff'; ctx.font = 'Bold 28px Assistant';
+                ctx.fillStyle = '#fff'; ctx.font = 'Bold 24px Assistant';
             }
-            ctx.textAlign = 'center'; ctx.fillText(text, 160, 58);
+            ctx.textAlign = 'center'; ctx.fillText(text, 128, 48);
             const texture = new THREE.CanvasTexture(canvas);
             const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
             sprite.position.set(pos[0], pos[1], pos[2]);
-            sprite.scale.set(isUnit ? 12 : 20, isUnit ? 4 : 6, 1);
+            sprite.scale.set(isUnit ? 10 : 15, isUnit ? 3 : 5, 1);
             return sprite;
         }
 
@@ -508,27 +503,15 @@
             const c = data.cfg;
             const tH = (c.floors + 1) * c.h;
 
-            // Environmental Grid (250m)
-            const grid = new THREE.GridHelper(500, 20, 0x1f2937, 0x0f172a);
-            grid.position.y = -0.5;
-            model.add(grid);
+            model.add(new THREE.GridHelper(500, 20, 0x1f2937, 0x0f172a));
 
-            const ring = new THREE.Mesh(
-                new THREE.RingGeometry(249, 250, 128),
-                new THREE.MeshBasicMaterial({ color: 0x6366f1, transparent: true, opacity: 0.3, side: THREE.DoubleSide })
-            );
-            ring.rotation.x = -Math.PI/2;
-            model.add(ring);
-
-            // Core
             const core = new THREE.Mesh(
                 new THREE.BoxGeometry(6, tH, 6),
-                new THREE.MeshPhongMaterial({ color: 0xef4444, transparent: true, opacity: 0.7, emissive: 0x450a0a })
+                new THREE.MeshPhongMaterial({ color: 0xef4444, transparent: true, opacity: 0.7 })
             );
             core.position.y = tH / 2;
             model.add(core);
 
-            // Floor Planes
             for(let i=0; i<=c.floors; i++) {
                 const floor = new THREE.Mesh(
                     new THREE.BoxGeometry(c.w, 0.1, c.d),
@@ -536,33 +519,30 @@
                 );
                 floor.position.y = i * c.h;
                 model.add(floor);
-                model.add(createLabel(`LVL ${i}`, [c.w/2 + 10, i * c.h, 0]));
+                model.add(createLabel(`L${i}`, [c.w/2 + 8, i * c.h, 0]));
             }
 
-            // Units
             if(c.units) c.units.forEach(u => {
                 let color = u.type === 'garden' ? 0x10b981 : (u.type === 'penthouse' ? 0xf59e0b : 0xffffff);
-                const unitGeo = new THREE.BoxGeometry(c.w/2.5, c.h * 0.85, c.d/2.5);
+                const unitGeo = new THREE.BoxGeometry(c.w/2.6, c.h * 0.8, c.d/2.6);
                 const unit = new THREE.Mesh(unitGeo, new THREE.MeshPhongMaterial({ color: color, transparent: true, opacity: 0.25 }));
                 unit.position.set(u.pos[0], (u.floor * c.h) + (c.h/2), u.pos[1]);
                 model.add(unit);
                 const line = new THREE.LineSegments(new THREE.EdgesGeometry(unitGeo), new THREE.LineBasicMaterial({ color: color, opacity: 0.8 }));
                 line.position.copy(unit.position); model.add(line);
-                model.add(createLabel(u.label, [u.pos[0], (u.floor * c.h) + c.h + 1, u.pos[1]], true));
+                model.add(createLabel(u.label, [u.pos[0], (u.floor * c.h) + c.h + 0.5, u.pos[1]], true));
             });
-
-            const shell = new THREE.Mesh(
-                new THREE.BoxGeometry(c.w, tH, c.d),
-                new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.02, side: THREE.DoubleSide })
-            );
-            shell.position.y = tH/2; model.add(shell);
 
             camera.position.set(c.w*3, tH*2, c.d*3);
             controls.target.set(0, tH/3, 0);
             controls.update();
         }
 
-        window.quickSearch = function(addr) { document.getElementById('addr-input').value = addr; performSearch(); };
+        window.quickSearch = function(addr) { 
+            const input = document.getElementById('addr-input');
+            input.value = addr;
+            performSearch(); 
+        };
 
         function performSearch() {
             const query = document.getElementById('addr-input').value.trim();
@@ -580,7 +560,7 @@
             for (let key in database) { if (normalize(key).includes(normQ) || normQ.includes(normalize(key))) { data = database[key]; break; } }
 
             if (!data) {
-                data = { name: query, mainStreet: "ציר לא ידוע", access: "סריקה בשטח", parking: "סריקה בשטח", floors: "?", garden: "?", penthouse: "?", infra: "מיקום לא ידוע", pop: "?", alert: "בצע סריקת גזרה מלאה", lat: 31.9, lng: 34.8, sv_embed: "", cfg: { w: 15, d: 12, floors: 5, h: 3, units: [] } };
+                data = { name: query, mainStreet: "ציר לא ידוע", access: "סריקה בשטח", parking: "סריקה בשטח", floors: "?", garden: "?", penthouse: "?", infra: "מיקום לא ידוע", pop: "?", alert: "בצע סריקה מלאה", lat: 31.9, lng: 34.8, sv_embed: "", cfg: { w: 15, d: 12, floors: 5, h: 3, units: [] } };
             }
 
             setTimeout(() => {
@@ -593,7 +573,6 @@
                 document.getElementById('ui-garden').innerHTML = `<b>דירות גן:</b> ${data.garden}`;
                 document.getElementById('ui-penthouse').innerHTML = `<b>פנטהאוז:</b> ${data.penthouse}`;
                 document.getElementById('ui-infra').innerHTML = `<b>תשתיות:</b> ${data.infra}`;
-                document.getElementById('ui-pop').innerHTML = `<b>דיירים:</b> ${data.pop}`;
                 document.getElementById('ui-alert').innerText = data.alert;
 
                 miniMap.innerHTML = `<iframe src="https://maps.google.com/maps?q=${data.lat},${data.lng}&t=&z=17&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>`;
@@ -606,8 +585,7 @@
                 buildModel(data);
                 loader.style.display = 'none'; sidebar.style.display = 'flex';
                 onResize();
-                addAiMessage(`ניתוח גזרה הושלם עבור ${data.name}. ניתן לראות את חלוקת היחידות וצירי ההגעה.`);
-            }, 800);
+            }, 600);
         }
 
         document.getElementById('search-btn').onclick = performSearch;
@@ -620,37 +598,6 @@
             chat.style.display = isVisible ? 'none' : 'flex';
             bubble.style.display = isVisible ? 'flex' : 'none';
         };
-
-        function addAiMessage(t) {
-            const m = document.getElementById('ori-messages');
-            const d = document.createElement('div');
-            d.className = 'msg msg-ai'; d.innerText = t;
-            m.appendChild(d); m.scrollTop = m.scrollHeight;
-        }
-
-        async function ask(text) {
-            if(!text) return;
-            const ms = document.getElementById('ori-messages');
-            const d = document.createElement('div');
-            d.className = 'msg msg-user'; d.innerText = text;
-            ms.appendChild(d); ms.scrollTop = ms.scrollHeight;
-            if (document.getElementById('ori-chat').style.display !== 'flex') toggleOri();
-
-            const apiKey = ""; 
-            const sys = `שמך אורי. אתה מומחה חילוץ וקה"א. ענה תמיד בעברית מקצועית וקצרה מאוד. בניין: ${JSON.stringify(currentBuildingData)}`;
-            try {
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method:'POST', headers:{'Content-Type':'application/json'},
-                    body: JSON.stringify({ contents:[{parts:[{text:text}]}], systemInstruction:{parts:[{text:sys}]}})
-                });
-                const r = await res.json();
-                addAiMessage(r.candidates[0].content.parts[0].text);
-            } catch(e) { addAiMessage("שגיאה בחיבור."); }
-        }
-
-        document.getElementById('ori-send').onclick = () => { const i = document.getElementById('ori-chat-input'); ask(i.value.trim()); i.value = ''; };
-        document.getElementById('ori-chat-input').onkeypress = (e) => { if (e.key === 'Enter') { ask(e.target.value.trim()); e.target.value = ''; } };
-        document.getElementById('ori-quick-input').onkeypress = (e) => { if (e.key === 'Enter') { ask(e.target.value.trim()); e.target.value = ''; } };
 
         function onResize() {
             if (!renderer) return;
