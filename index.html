@@ -2,8 +2,8 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FIRE-CORE v12.1 - PRO COMMAND MOBILE STABLE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>FIRE-CORE v12.2 - MOBILE OPTIMIZED</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap');
         
@@ -25,15 +25,15 @@
             width: 100vw;
         }
 
-        /* Header - Professional Dark */
+        /* Header - Scaled for readability */
         header {
-            flex: 0 0 55px;
+            flex: 0 0 60px;
             background: #0a0b0e;
             padding: 0 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #1f2937;
+            border-bottom: 2px solid #ef4444;
             z-index: 1000;
         }
 
@@ -41,18 +41,18 @@
             display: flex;
             gap: 8px;
             flex: 1;
-            max-width: 450px;
+            max-width: 500px;
             margin: 0 10px;
         }
 
         input#addr-input {
             flex: 1;
-            padding: 8px 12px;
-            border-radius: 6px;
+            padding: 10px 15px;
+            border-radius: 8px;
             border: 1px solid #374151;
             background: #111827;
             color: #fff;
-            font-size: 14px;
+            font-size: 16px; /* Prevent iOS zoom on focus */
             outline: none;
             transition: all 0.2s;
         }
@@ -60,14 +60,14 @@
         input#addr-input:focus { border-color: #ef4444; box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2); }
 
         .btn-search {
-            padding: 8px 15px;
+            padding: 10px 20px;
             background: #ef4444;
             color: #fff;
             border: none;
-            border-radius: 6px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         /* Main Workspace */
@@ -80,7 +80,7 @@
 
         /* Information Sidebar */
         #info-sidebar {
-            flex: 0 0 280px;
+            flex: 0 0 300px;
             background: #0a0b0e;
             border-left: 1px solid #1f2937;
             display: none;
@@ -93,37 +93,37 @@
         .side-card {
             background: #111827;
             border: 1px solid #1f2937;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
         }
 
         .section-title { 
             color: #ef4444; 
-            font-size: 11px; 
-            font-weight: 700; 
+            font-size: 12px; 
+            font-weight: 800; 
             text-transform: uppercase; 
             letter-spacing: 0.05em;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
-        .data-row { font-size: 13px; line-height: 1.4; color: #d1d5db; margin-bottom: 3px; }
+        .data-row { font-size: 14px; line-height: 1.6; color: #d1d5db; margin-bottom: 6px; }
         .data-row b { color: #fff; }
 
         .alert-panel {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid #f59e0b;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1.5px solid #f59e0b;
             color: #f59e0b;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
         }
 
-        /* Simulation Canvas Area */
+        /* Simulation Area */
         #canvas-wrap {
             flex: 1;
             background: radial-gradient(circle at 50% 50%, #111827 0%, #020203 100%);
@@ -131,73 +131,85 @@
             z-index: 5;
         }
 
-        /* Floating Street View Window */
+        /* Floating Street View Window - Improved for Mobile */
         #floating-sv {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            height: 170px;
+            bottom: 25px;
+            right: 25px;
+            width: 350px;
+            height: 200px;
             background: #000;
-            border: 2px solid #374151;
-            border-radius: 12px;
+            border: 3px solid #374151;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
             display: none;
             z-index: 100;
         }
 
         #floating-sv iframe { width: 100%; height: 100%; border: none; }
 
-        /* Mini-Map Overlay */
+        /* Mini-Map */
         #mini-map {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 100px;
-            height: 100px;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+            height: 120px;
             background: #000;
-            border: 1px solid #ef4444;
-            border-radius: 8px;
+            border: 2px solid #ef4444;
+            border-radius: 10px;
             z-index: 50;
             overflow: hidden;
             display: none;
-            pointer-events: none; /* Don't block canvas rotation */
+            pointer-events: none;
         }
 
         #mini-map iframe { width: 100%; height: 100%; border: none; }
 
-        /* Responsive Mobile UI */
+        /* Mobile Optimization */
         @media (max-width: 768px) {
+            header { flex: 0 0 70px; padding: 0 10px; }
+            .btn-search { padding: 10px 12px; font-size: 13px; }
+            
             main { flex-direction: column-reverse; }
+            
             #info-sidebar { 
-                flex: 0 0 40%; 
+                flex: 0 0 50%; /* More space for readable text */
                 width: 100%; 
                 border-left: none; 
-                border-top: 1px solid #1f2937;
-                display: none;
+                border-top: 2px solid #ef4444;
+                padding: 15px 10px;
             }
+
+            .data-row { font-size: 15px; } /* Larger font for mobile */
+            .section-title { font-size: 13px; }
+
             #floating-sv { 
-                width: 120px; 
-                height: 75px; 
-                bottom: calc(40% + 15px); 
-                right: 10px; 
+                width: 180px; 
+                height: 110px; 
+                bottom: calc(50% + 20px); 
+                right: 15px; 
+                border-color: #ef4444;
+                display: block; /* Ensure it stays visible */
             }
+            
             #ori-container { 
-                left: 10px; 
-                bottom: calc(40% + 15px); 
-                transform: scale(0.7); 
+                left: 15px; 
+                bottom: calc(50% + 20px); 
+                transform: scale(0.85); 
                 transform-origin: bottom left;
             }
+
             #canvas-wrap { flex: 1; }
             .logo-text { display: none; }
         }
 
-        /* ORI AI ASSISTANT */
+        /* ORI ASSISTANT */
         #ori-container {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            bottom: 30px;
+            left: 30px;
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -208,79 +220,64 @@
         #ori-bubble {
             background: #fff;
             color: #111;
-            padding: 8px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 18px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
             position: relative;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             border: 2px solid #ef4444;
             pointer-events: auto;
-            width: 220px;
+            width: 250px;
         }
 
         #ori-bubble::after {
             content: ''; position: absolute; bottom: -12px; left: 50%;
             transform: translateX(-50%);
-            border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 12px solid #ef4444;
+            border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 12px solid #ef4444;
         }
 
         #ori-quick-input {
-            width: 100%; margin-top: 5px; padding: 5px;
-            border-radius: 6px; border: 1px solid #d1d5db;
-            font-size: 10px; outline: none;
+            width: 100%; margin-top: 8px; padding: 8px;
+            border-radius: 10px; border: 1px solid #d1d5db;
+            font-size: 13px; outline: none; background: #f9fafb;
         }
 
         #ori-avatar {
-            width: 60px; height: 60px;
+            width: 65px; height: 65px;
             background: #fff;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
             cursor: pointer; border: 3px solid #ef4444;
             overflow: hidden; pointer-events: auto;
         }
 
         #ori-avatar svg { width: 85%; height: 85%; }
 
-        #ori-chat {
-            position: fixed; bottom: 100px; left: 20px;
-            width: 280px; background: #0a0b0e; border: 1px solid #ef4444;
-            border-radius: 15px; display: none; flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,1); z-index: 10000;
-        }
-
-        #ori-header { background: #ef4444; padding: 8px 12px; font-weight: 700; color: #fff; display: flex; justify-content: space-between; font-size: 13px; }
-        #ori-messages { height: 180px; overflow-y: auto; padding: 10px; font-size: 12px; display: flex; flex-direction: column; gap: 6px; }
-        .msg { padding: 6px 10px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
-        .msg-ai { background: #1f2937; color: #f3f4f6; align-self: flex-start; border-bottom-left-radius: 0; }
-        .msg-user { background: #ef4444; color: #fff; align-self: flex-end; border-bottom-right-radius: 0; }
-        #ori-input-wrap { padding: 8px; border-top: 1px solid #1f2937; display: flex; gap: 5px; }
-        #ori-chat-input { flex: 1; background: #111827; border: 1px solid #374151; color: #fff; padding: 6px; border-radius: 6px; outline: none; font-size: 12px; }
-
-        /* Welcome Screen Overlay */
+        /* Welcome Overlay */
         #welcome-screen {
             position: absolute; inset: 0; background: #020203; z-index: 50;
             display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-            padding: 20px;
+            padding: 25px;
         }
 
-        .quick-addresses { margin-top: 20px; display: grid; gap: 8px; width: 100%; max-width: 380px; }
+        .quick-addresses { margin-top: 25px; display: grid; gap: 12px; width: 100%; max-width: 400px; }
         .addr-btn { 
-            background: #111827; border: 1px solid #1f2937; color: #9ca3af; 
-            padding: 12px; border-radius: 10px; cursor: pointer; font-size: 14px; 
-            transition: 0.2s; text-align: center;
+            background: #111827; border: 1px solid #1f2937; color: #fff; 
+            padding: 18px; border-radius: 12px; cursor: pointer; font-size: 16px; 
+            transition: 0.2s; text-align: center; font-weight: 600;
         }
-        .addr-btn:hover { border-color: #ef4444; color: #fff; }
+        .addr-btn:hover { border-color: #ef4444; background: #1f2937; }
 
         #loading-screen {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9); padding: 25px; border-radius: 15px;
-            z-index: 200; display: none; color: #ef4444; font-weight: 700; border: 1px solid #ef4444; text-align: center;
+            background: rgba(0,0,0,0.95); padding: 35px; border-radius: 20px;
+            z-index: 200; display: none; color: #ef4444; font-weight: 800; border: 2px solid #ef4444; text-align: center;
         }
 
-        .legend-dot { width: 8px; height: 8px; margin-left: 8px; border-radius: 2px; flex-shrink: 0; }
+        .legend-dot { width: 10px; height: 10px; margin-left: 10px; border-radius: 3px; flex-shrink: 0; }
     </style>
     <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
     <script type="importmap">
@@ -296,20 +293,21 @@
 
     <div class="app-wrapper">
         <header>
-            <div class="logo-text" style="color: #ef4444; font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                <span>🚒</span> FIRE-CORE
+            <div class="logo-text" style="color: #ef4444; font-weight: 800; font-size: 20px; display: flex; align-items: center; gap: 10px;">
+                <span>🚒</span> FIRE-CORE PRO
             </div>
             <div class="search-bar">
-                <input id="addr-input" type="text" placeholder="חיפוש כתובת..." autofocus />
+                <input id="addr-input" type="text" placeholder="הקלד כתובת..." autofocus />
                 <button id="search-btn" class="btn-search">אחזר</button>
             </div>
         </header>
 
         <main>
+            <!-- Welcome View -->
             <div id="welcome-screen">
-                <div style="font-size: 50px; margin-bottom: 10px; filter: drop-shadow(0 0 10px #ef4444);">🛡️</div>
-                <h2 style="font-size: 22px; margin: 0;">מודיעין מבנים</h2>
-                <p style="color: #6b7280; font-size: 14px; margin-top: 5px;">בחר כתובת לאנליזה הנדסית:</p>
+                <div style="font-size: 70px; margin-bottom: 20px; filter: drop-shadow(0 0 15px #ef4444);">🛡️</div>
+                <h2 style="font-size: 28px; margin: 0; letter-spacing: 0.5px;">מודיעין מבנים מבצעי</h2>
+                <p style="color: #9ca3af; font-size: 16px; margin-top: 10px;">בחר כתובת לאנליזה מיידית:</p>
                 <div class="quick-addresses">
                     <div class="addr-btn" onclick="quickSearch('הקשת 3 נס ציונה')">📍 הקשת 3, נס ציונה</div>
                     <div class="addr-btn" onclick="quickSearch('דרך הפרחים 9 גדרה')">📍 דרך הפרחים 9, גדרה</div>
@@ -317,19 +315,20 @@
                 </div>
             </div>
 
-            <div id="loading-screen">מנתח נתוני שטח ודירות...</div>
+            <div id="loading-screen">מנתח נתוני שטח ודירות...<br><small style="font-weight:400; opacity:0.7">אנא המתן</small></div>
 
+            <!-- Sidebar -->
             <aside id="info-sidebar">
-                <h3 id="ui-title" style="margin:0 0 10px 0; color: #ef4444; font-size: 16px; border-bottom: 1px solid #1f2937; padding-bottom: 8px;">-</h3>
+                <h3 id="ui-title" style="margin:0 0 12px 0; color: #ef4444; font-size: 20px; border-bottom: 2px solid #1f2937; padding-bottom: 10px;">-</h3>
                 
-                <div class="section-title"><span>📍</span> גישה</div>
+                <div class="section-title"><span>📍</span> גישה מבצעית</div>
                 <div class="side-card">
                     <div class="data-row" id="ui-main-street">-</div>
                     <div class="data-row" id="ui-access">-</div>
                     <div class="data-row" id="ui-parking">-</div>
                 </div>
 
-                <div class="section-title"><span>🏗️</span> הנדסה</div>
+                <div class="section-title"><span>🏗️</span> מפרט הנדסי ודירות</div>
                 <div class="side-card">
                     <div class="data-row" id="ui-floors">-</div>
                     <div class="data-row" id="ui-garden">-</div>
@@ -337,13 +336,13 @@
                     <div class="data-row" id="ui-infra">-</div>
                 </div>
 
-                <div class="section-title"><span>⚠️</span> התראות</div>
+                <div class="section-title"><span>⚠️</span> התראות קריטיות</div>
                 <div class="alert-panel" id="ui-alert">-</div>
                 
-                <div style="margin-top: 15px; font-size: 10px; color: #4b5563;">
-                    <div style="display:flex; align-items:center; margin-bottom:3px;"><div class="legend-dot" style="background:#ef4444"></div> ליבת בטון</div>
-                    <div style="display:flex; align-items:center; margin-bottom:3px;"><div class="legend-dot" style="background:#10b981"></div> דירות גן</div>
-                    <div style="display:flex; align-items:center; margin-bottom:3px;"><div class="legend-dot" style="background:#f59e0b"></div> פנטהאוז</div>
+                <div style="margin-top: 20px; font-size: 12px; color: #6b7280; padding-bottom: 20px;">
+                    <div style="display:flex; align-items:center; margin-bottom:5px;"><div class="legend-dot" style="background:#ef4444"></div> ליבת בטון / מדרגות</div>
+                    <div style="display:flex; align-items:center; margin-bottom:5px;"><div class="legend-dot" style="background:#10b981"></div> דירות גן</div>
+                    <div style="display:flex; align-items:center; margin-bottom:5px;"><div class="legend-dot" style="background:#f59e0b"></div> פנטהאוזים</div>
                 </div>
             </aside>
 
@@ -352,6 +351,7 @@
                 <div id="floating-sv"></div>
             </div>
 
+            <!-- ORI ASSISTANT -->
             <div id="ori-container">
                 <div id="ori-bubble">
                     <div class="bubble-text">שלום אני אורי, עוזר וקה"א , לכל שאלה אני לרשותך..</div>
@@ -370,18 +370,6 @@
                     </svg>
                 </div>
             </div>
-
-            <div id="ori-chat">
-                <div id="ori-header">
-                    <span>ORI AI - OPS</span>
-                    <span style="cursor:pointer" onclick="toggleOri()">✕</span>
-                </div>
-                <div id="ori-messages"></div>
-                <div id="ori-input-wrap">
-                    <input id="ori-chat-input" type="text" placeholder="הקלד..." />
-                    <button id="ori-send" style="background:#ef4444; border:none; color:#fff; padding:5px 10px; border-radius:4px;">שלח</button>
-                </div>
-            </div>
         </main>
     </div>
 
@@ -396,14 +384,14 @@
             "הקשת 3 נס ציונה": {
                 name: "הקשת 3, נס ציונה",
                 mainStreet: "רחוב השריון",
-                access: "גישה מרחוב הקשת בלבד.",
+                access: "מרחוב הקשת בלבד (צר).",
                 parking: "קומת עמודים + חצרות.",
                 floors: "4 קומות מעל עמודים.",
                 garden: "2 דירות גן (101, 102).",
                 penthouse: "2 פנטהאוזים בקומה 4.",
-                infra: "מים: חזית שמאל. חשמל: נישה ימנית.",
+                infra: "מים: חזית שמאל. חשמל: ארון ימין.",
                 pop: "~35 דיירים.",
-                alert: "רחוב ללא מוצא - סיבוב מנוף מוגבל.",
+                alert: "רחוב ללא מוצא! מנוף חייב להיכנס לאחור.",
                 lat: 31.9269502, lng: 34.8121877,
                 sv_embed: "https://www.google.com/maps/embed?pb=!4v1705658000000!6m8!1m7!1ss_umpcog4UlLmpx7U8wv_Q!2m2!1d31.9269502!2d34.8121877!3f322.76!4f11.59!5f0.78",
                 cfg: { w: 18, d: 15, floors: 4, h: 3.2, 
@@ -417,15 +405,15 @@
             },
             "דרך הפרחים 9 גדרה": {
                 name: "דרך הפרחים 9, גדרה",
-                mainStreet: "כביש 40",
+                mainStreet: "כביש 40 / הרצל",
                 access: "כניסה מדרך הפרחים.",
                 parking: "חניון תת-קרקעי (מינוס 1).",
                 floors: "8 קומות מעל לובי.",
-                garden: "4 דירות גן.",
+                garden: "4 דירות גן (1, 2, 3, 4).",
                 penthouse: "2 פנטהאוזים בקומה 8.",
                 infra: "מים: חזית ימין. חשמל: עורף.",
                 pop: "~105 דיירים.",
-                alert: "חניון סגור - הצטברות עשן.",
+                alert: "חניון פעיל - סכנת הצטברות עשן.",
                 lat: 31.8123, lng: 34.7812,
                 sv_embed: "https://www.google.com/maps/embed?pb=!4v1705658000000!6m8!1m7!1s-u_y5f4hO4vH7rG-S4_mOQ!2m2!1d31.8123!2d34.7812!3f180!4f10!5f0.78",
                 cfg: { w: 22, d: 18, floors: 8, h: 3.1, 
@@ -444,24 +432,24 @@
             const wrap = document.getElementById('canvas-wrap');
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(35, wrap.clientWidth / wrap.clientHeight, 0.1, 2000);
-            camera.position.set(100, 80, 100);
+            camera.position.set(120, 100, 120);
 
             const isMobile = window.innerWidth <= 768;
             renderer = new THREE.WebGLRenderer({ 
                 antialias: !isMobile, 
                 alpha: true, 
-                powerPreference: isMobile ? 'default' : 'high-performance' 
+                powerPreference: isMobile ? 'low-power' : 'high-performance' 
             });
             
             renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 2));
             wrap.appendChild(renderer.domElement);
 
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
 
-            scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
             const sun = new THREE.DirectionalLight(0xffffff, 1);
             sun.position.set(50, 150, 50);
             scene.add(sun);
@@ -479,22 +467,27 @@
         }
 
         function createLabel(text, pos, isUnit = false) {
+            const isMobile = window.innerWidth <= 768;
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = 256; canvas.height = 80;
+            canvas.width = 300; canvas.height = 100;
+            
             if(isUnit) {
-                ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-                ctx.beginPath(); ctx.roundRect(5, 5, 240, 70, 12); ctx.fill();
-                ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2; ctx.stroke();
-                ctx.fillStyle = '#fff'; ctx.font = 'Bold 20px Assistant';
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+                ctx.beginPath(); ctx.roundRect(5, 5, 280, 80, 15); ctx.fill();
+                ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3; ctx.stroke();
+                ctx.fillStyle = '#fff'; ctx.font = `Bold ${isMobile ? '28px' : '22px'} Assistant`;
             } else {
-                ctx.fillStyle = '#fff'; ctx.font = 'Bold 24px Assistant';
+                ctx.fillStyle = '#fff'; ctx.font = `Bold ${isMobile ? '32px' : '28px'} Assistant`;
             }
-            ctx.textAlign = 'center'; ctx.fillText(text, 128, 48);
+            
+            ctx.textAlign = 'center';
+            ctx.fillText(text, 150, 58);
+            
             const texture = new THREE.CanvasTexture(canvas);
             const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true }));
             sprite.position.set(pos[0], pos[1], pos[2]);
-            sprite.scale.set(isUnit ? 10 : 15, isUnit ? 3 : 5, 1);
+            sprite.scale.set(isUnit ? (isMobile ? 15 : 12) : (isMobile ? 22 : 18), isUnit ? (isMobile ? 5 : 4) : (isMobile ? 8 : 6), 1);
             return sprite;
         }
 
@@ -519,21 +512,21 @@
                 );
                 floor.position.y = i * c.h;
                 model.add(floor);
-                model.add(createLabel(`L${i}`, [c.w/2 + 8, i * c.h, 0]));
+                model.add(createLabel(`קומה ${i}`, [c.w/2 + 12, i * c.h, 0]));
             }
 
             if(c.units) c.units.forEach(u => {
                 let color = u.type === 'garden' ? 0x10b981 : (u.type === 'penthouse' ? 0xf59e0b : 0xffffff);
-                const unitGeo = new THREE.BoxGeometry(c.w/2.6, c.h * 0.8, c.d/2.6);
-                const unit = new THREE.Mesh(unitGeo, new THREE.MeshPhongMaterial({ color: color, transparent: true, opacity: 0.25 }));
+                const unitGeo = new THREE.BoxGeometry(c.w/2.6, c.h * 0.85, c.d/2.6);
+                const unit = new THREE.Mesh(unitGeo, new THREE.MeshPhongMaterial({ color: color, transparent: true, opacity: 0.3 }));
                 unit.position.set(u.pos[0], (u.floor * c.h) + (c.h/2), u.pos[1]);
                 model.add(unit);
                 const line = new THREE.LineSegments(new THREE.EdgesGeometry(unitGeo), new THREE.LineBasicMaterial({ color: color, opacity: 0.8 }));
                 line.position.copy(unit.position); model.add(line);
-                model.add(createLabel(u.label, [u.pos[0], (u.floor * c.h) + c.h + 0.5, u.pos[1]], true));
+                model.add(createLabel(u.label, [u.pos[0], (u.floor * c.h) + c.h + 1, u.pos[1]], true));
             });
 
-            camera.position.set(c.w*3, tH*2, c.d*3);
+            camera.position.set(c.w*3, tH*2.5, c.d*3);
             controls.target.set(0, tH/3, 0);
             controls.update();
         }
@@ -571,7 +564,7 @@
                 document.getElementById('ui-parking').innerHTML = `<b>חנייה:</b> ${data.parking}`;
                 document.getElementById('ui-floors').innerHTML = `<b>קומות:</b> ${data.floors}`;
                 document.getElementById('ui-garden').innerHTML = `<b>דירות גן:</b> ${data.garden}`;
-                document.getElementById('ui-penthouse').innerHTML = `<b>פנטהאוז:</b> ${data.penthouse}`;
+                document.getElementById('ui-penthouse').innerHTML = `<b>פנטהאוזים:</b> ${data.penthouse}`;
                 document.getElementById('ui-infra').innerHTML = `<b>תשתיות:</b> ${data.infra}`;
                 document.getElementById('ui-alert').innerText = data.alert;
 
@@ -592,11 +585,9 @@
         document.getElementById('addr-input').onkeypress = (e) => { if (e.key === 'Enter') performSearch(); };
 
         window.toggleOri = () => {
-            const chat = document.getElementById('ori-chat');
             const bubble = document.getElementById('ori-bubble');
-            const isVisible = chat.style.display === 'flex';
-            chat.style.display = isVisible ? 'none' : 'flex';
-            bubble.style.display = isVisible ? 'flex' : 'none';
+            const current = bubble.style.display;
+            bubble.style.display = (current === 'none') ? 'block' : 'none';
         };
 
         function onResize() {
